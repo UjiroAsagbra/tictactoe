@@ -3,6 +3,8 @@ import os
 
 spots = {1:'1', 2:'2', 3:'3', 4:'4', 5:'5', 6:'6', 7:'7', 8:'8', 9:'9'}
 
+player1_name = input(("Enter Player 1's name: "))
+player2_name = input(("Enter Player 2's name: "))
 playing = True
 complete = False
 turn = 0
@@ -11,12 +13,16 @@ prev_turn = -1
 while playing:
     # RESET THE SCREEN
     os.system('cls' if os.name == 'nt' else 'clear')
+    if check_turn(turn) == "X":
+        current_player_name = player2_name
+    else:
+        current_player_name = player1_name
     draw_board(spots)
     #IF AN INVALID TURN OCCURS, LET PLAYER KNOW
     if prev_turn == turn:
         print('Invalid spot selected, please pick another.')
     prev_turn = turn
-    print("Player " + str((turn % 2) +1 ) +"'s turn: Pick your spot or press q to quit")
+    print(current_player_name + "'s turn: Pick your spot or press q to quit")
     # GET INPUT FROM PLAYERS
     choice = input()
     if choice == 'q':
@@ -36,8 +42,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 draw_board(spots)
 #DECLARE WINNER
 if complete:
-    if check_turn(turn) == 'X': print('Player 1 Wins!!')
-    else: print("Player 2 Wins!!")
+    if check_turn(turn) == 'X': print(f'{player1_name} Wins!!')
+    else: print(f"{player2_name} Wins!!")
 else:
     print('No Winner')
 
